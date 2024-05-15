@@ -9,11 +9,14 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import OutboxIcon from '@mui/icons-material/Outbox';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import './css/sidebar.css';
+import { useDispatch } from 'react-redux';
+import { openSendMessage } from './features/mailSlice';
 
 function Sidebar() {
+  const dispatch = useDispatch();
   return (
     <div className='sidebar'>
-        <Button startIcon={<AddIcon />} className='compose_btn'>Compose</Button>
+        <Button startIcon={<AddIcon />} className='compose_btn' onClick={()=>dispatch(openSendMessage())}>Compose</Button>
         <Sidebaroptions Icon={InboxIcon} title="Inbox" number="220" isactive={true} />
         <Sidebaroptions Icon={MarkEmailUnreadIcon} title="Unread" number="220" />
         <Sidebaroptions Icon={StarRateIcon} title="Starred" number="220" />

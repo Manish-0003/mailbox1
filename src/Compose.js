@@ -14,7 +14,12 @@ import CreateIcon from "@mui/icons-material/Create";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./css/compose.css";
+import { useDispatch } from "react-redux";
+import { closeSendMessage } from "./features/mailSlice";
+
 function Compose() {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="compose">
@@ -25,35 +30,34 @@ function Compose() {
           <div className="compose_header_right">
             <RemoveIcon />
             <HeightIcon />
-            <CloseIcon />
+            <CloseIcon onClick={() => dispatch(closeSendMessage())} />
           </div>
         </div>
         <div className="compose_body">
-            <div className="compose_bodyForm">
-              <input type="email" placeholder="Reciepents" />
-               <input type="text" placeholder="Subject" />
-               <textarea rows="20"></textarea>
-            </div>
+          <div className="compose_bodyForm">
+            <input type="email" placeholder="Recipients" />
+            <input type="text" placeholder="Subject" />
+            <textarea rows="20"></textarea>
+          </div>
         </div>
         <div className="compose_footer">
-            <div className="compose_footerleft">
-                <button type="submit">
-                    Send <ArrowDropDownIcon />
-                </button>
-            </div>
-            <div className="compose_footerright">
-                <FormatColorTextIcon />
-                <AttachFileIcon />
-                <LinkIcon />
-                <InsertEmoticonIcon />
-                <NoteAddIcon />
-                <PhonelinkLockIcon />
-                <PhotoIcon />
-                <CreateIcon />
-                <MoreVertIcon />
-                <DeleteIcon />
-
-            </div>
+          <div className="compose_footerleft">
+            <button type="submit">
+              Send <ArrowDropDownIcon />
+            </button>
+          </div>
+          <div className="compose_footerright">
+            <FormatColorTextIcon />
+            <AttachFileIcon />
+            <LinkIcon />
+            <InsertEmoticonIcon />
+            <NoteAddIcon />
+            <PhonelinkLockIcon />
+            <PhotoIcon />
+            <CreateIcon />
+            <MoreVertIcon />
+            <DeleteIcon />
+          </div>
         </div>
       </div>
     </>
