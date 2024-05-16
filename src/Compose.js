@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RemoveIcon from "@mui/icons-material/Remove";
 import HeightIcon from "@mui/icons-material/Height";
 import CloseIcon from "@mui/icons-material/Close";
@@ -16,9 +16,46 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./css/compose.css";
 import { useDispatch } from "react-redux";
 import { closeSendMessage } from "./features/mailSlice";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
+import { db } from "./firebase";
 
 function Compose() {
   const dispatch = useDispatch();
+  const [to, setTo] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+
+  const formSubmit = async (event) => {
+    event.preventDefault();
+    if (to === '') {
+      return alert("To is required");
+    }
+    if (subject === '') {
+      return alert("Subject is required");
+    }
+    if (message === '') {
+      return alert("Message is required");
+    }
+
+    try {
+      await db.collection('emails').add({
+        to: to,
+        subject: subject,
+        message: message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      setTo('');
+      setSubject('');
+      setMessage('');
+      dispatch(closeSendMessage());
+      alert('Email sent successfully');
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("Failed to send email. Please try again later.");
+    }
+  };
 
   return (
     <>
@@ -33,32 +70,34 @@ function Compose() {
             <CloseIcon onClick={() => dispatch(closeSendMessage())} />
           </div>
         </div>
-        <div className="compose_body">
-          <div className="compose_bodyForm">
-            <input type="email" placeholder="Recipients" />
-            <input type="text" placeholder="Subject" />
-            <textarea rows="20"></textarea>
+        <form onSubmit={formSubmit}>
+          <div className="compose_body">
+            <div className="compose_bodyForm">
+              <input type="email" placeholder="Recipients" value={to} onChange={(event) => setTo(event.target.value)} />
+              <input type="text" placeholder="Subject" value={subject} onChange={(event) => setSubject(event.target.value)} />
+              <textarea rows="20" name="message" onChange={(event) => setMessage(event.target.value)} value={message} />
+            </div>
           </div>
-        </div>
-        <div className="compose_footer">
-          <div className="compose_footerleft">
-            <button type="submit">
-              Send <ArrowDropDownIcon />
-            </button>
+          <div className="compose_footer">
+            <div className="compose_footerleft">
+              <button type="submit">
+                Send <ArrowDropDownIcon />
+              </button>
+            </div>
+            <div className="compose_footerright">
+              <FormatColorTextIcon />
+              <AttachFileIcon />
+              <LinkIcon />
+              <InsertEmoticonIcon />
+              <NoteAddIcon />
+              <PhonelinkLockIcon />
+              <PhotoIcon />
+              <CreateIcon />
+              <MoreVertIcon />
+              <DeleteIcon />
+            </div>
           </div>
-          <div className="compose_footerright">
-            <FormatColorTextIcon />
-            <AttachFileIcon />
-            <LinkIcon />
-            <InsertEmoticonIcon />
-            <NoteAddIcon />
-            <PhonelinkLockIcon />
-            <PhotoIcon />
-            <CreateIcon />
-            <MoreVertIcon />
-            <DeleteIcon />
-          </div>
-        </div>
+        </form>
       </div>
     </>
   );

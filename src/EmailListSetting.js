@@ -8,7 +8,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-function EmailListSeting() {
+function EmailListSetting() {
   return (
     <div className="emaillist_setting">
       <div className="email_settingleft">
@@ -39,4 +39,4 @@ function EmailListSeting() {
   );
 }
 
-export default EmailListSeting;
+export default EmailListSetting;

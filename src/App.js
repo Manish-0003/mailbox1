@@ -18,7 +18,7 @@ function App() {
       {
         isMessageOpen && <Compose />
       }
-      <Compose />
+      
     </div>
   );
 }
