@@ -7,43 +7,42 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AppsIcon from '@mui/icons-material/Apps';
+import { auth } from "./firebase"; // Ensure auth is imported from firebase config
 import "./css/header.css";
+
 const Header = () => {
   return (
-    <>
-      <div className="header">
-        <div className="header_left">
+    <div className="header">
+      <div className="header_left">
+        <IconButton>
+          <TocIcon />
+          <GoogleIcon />
+        </IconButton>
+      </div>
+      <div className="header_mid">
+        <div className="search_mail">
           <IconButton>
-            <TocIcon />
-            <GoogleIcon />
+            <SearchIcon />
+          </IconButton>
+          <input type="text" placeholder="Search mail" />
+          <IconButton>
+            <ArrowDownwardIcon />
           </IconButton>
         </div>
-        <div className="header_mid">
-          <div className="search_mail">
-            <IconButton>
-              <SearchIcon />
-            </IconButton>
-            <input type="text" placeholder="search mail" />
-            <IconButton>
-              <ArrowDownwardIcon />
-            </IconButton>
-          </div>
-          <div className="header_right">
-          <IconButton>
-              <HelpOutlineIcon />
-            </IconButton>
-            <IconButton>
-              <SettingsIcon />
-            </IconButton>
-            <IconButton>
-              <AppsIcon/>
-            </IconButton>
-            <Avatar></Avatar>
-
-          </div>
-        </div>
       </div>
-    </>
+      <div className="header_right">
+        <IconButton>
+          <HelpOutlineIcon />
+        </IconButton>
+        <IconButton>
+          <SettingsIcon />
+        </IconButton>
+        <IconButton>
+          <AppsIcon />
+        </IconButton>
+        <Avatar onClick={() => auth.signOut()} />
+      </div>
+    </div>
   );
 };
 

@@ -73,3 +73,68 @@
     flex: 10%;
     justify-content: flex-end;
 }
+.emailbody .emailbody_right p{
+  font-size: 12px;
+}
+.emaildetails_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid whitesmoke;
+  padding:0px 15px ;
+
+}
+.emaildetails_headerleft {
+  display: flex;
+  align-items: center;
+}
+.emaildetails_header svg {
+  font-size: 18px;
+}
+.emaildetails_middleheader{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid whitesmoke ;
+}
+.emaildetails_middleheaderleft {
+  display: flex;
+  align-items: center;
+}
+.emaildetails_middleheaderright{
+  display: flex;
+  align-items: center;
+}
+.emaildetails_middleheader svg {
+  font-size: 18px;
+}
+
+.emaildetails_middleheaderleft h4{
+  margin-right: 10px;
+}
+.emaildetails_middleheaderleft p{
+  font-size: 14px;
+}
+.emaildetails_middleheaderright p{
+  margin-right: 10px;
+}
+.emaildetails_body{
+  display: flex;
+  padding: 0px 15px;
+}
+.emaildetails_message{
+  box-shadow: 0px 0px 3px whitesmoke;
+  height: 100%;
+}
+.emaillist_settingright {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.emaildetails_message{
+  box-shadow: 0px 0px 3px grey;
+  height: 200%;
+}
+
+
+

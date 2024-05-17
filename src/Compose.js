@@ -14,17 +14,20 @@ import CreateIcon from "@mui/icons-material/Create";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./css/compose.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeSendMessage } from "./features/mailSlice";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { db } from "./firebase";
+import { selectuser } from "./features/userSlice";
 
 function Compose() {
   const dispatch = useDispatch();
   const [to, setTo] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+
+  const user = useSelector(selectuser)
 
   const formSubmit = async (event) => {
     event.preventDefault();
@@ -43,6 +46,8 @@ function Compose() {
         to: to,
         subject: subject,
         message: message,
+        from: user.email,
+        fromName: user.displayName,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
       });
 
