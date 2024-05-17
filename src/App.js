@@ -8,31 +8,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectSendMessageIsOpen } from "./features/mailSlice";
 import Emaildetail from "./Emaildetail";
 import Login from "./Login";
-import { selectuser, signin, signout } from "./features/userSlice";
-import { auth } from "./firebase";
+import { selectUser, signin, signout } from "./features/userSlice";
 
 function App() {
   const dispatch = useDispatch();
   const isMessageOpen = useSelector(selectSendMessageIsOpen);
-  const user = useSelector(selectuser);
+  const user = useSelector(selectUser);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        dispatch(
-          signin({
-            displayName: user.displayName,
-            email: user.email,
-            photoURL: user.photoURL,
-          })
-        );
-      } else {
-        dispatch(signout());
-      }
-    });
-
-    return () => unsubscribe();
-  }, [dispatch]);
+    if (user) {
+      dispatch(signin({
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        email: user.email
+      }));
+    } else {
+      dispatch(signout());
+    }
+  }, [user, dispatch]); // Add dependencies to avoid infinite loop
 
   return (
     <Router>

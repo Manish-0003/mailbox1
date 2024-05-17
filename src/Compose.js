@@ -19,7 +19,7 @@ import { closeSendMessage } from "./features/mailSlice";
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import { db } from "./firebase";
-import { selectuser } from "./features/userSlice";
+import { selectUser } from "./features/userSlice";
 
 function Compose() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ function Compose() {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
 
-  const user = useSelector(selectuser)
+  const user = useSelector(selectUser)
 
   const formSubmit = async (event) => {
     event.preventDefault();
